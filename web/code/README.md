@@ -1,2 +1,0 @@
-# teste
-### a Sails application
