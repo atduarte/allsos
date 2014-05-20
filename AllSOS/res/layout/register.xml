@@ -35,8 +35,22 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:id="@+id/button"
+            android:text="Register"
+            android:id="@+id/btn_register"
             android:layout_marginBottom="31dp"
             android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password"
+            android:id="@+id/lbl_confirm"
+            android:layout_marginTop="58dp" android:singleLine="false" android:layout_below="@+id/txt_password"
+            android:layout_centerHorizontal="true"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/txt_confirm" android:layout_below="@+id/lbl_confirm" android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"/>
 </RelativeLayout>
