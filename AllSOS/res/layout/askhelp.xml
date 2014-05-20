@@ -3,6 +3,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:weightSum="1" android:gravity="center">
 
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_selected"
+            android:text="Serviço Seleccionado: "/>
+    <Button
+            android:layout_width="251dp"
+            android:layout_height="wrap_content"
+            android:text="SOS!"
+            android:id="@+id/btn_sos" android:layout_gravity="center_horizontal" android:layout_weight="0.28"
+            android:background="@drawable/oval_button" android:textSize="50dp"/>
 </LinearLayout>
