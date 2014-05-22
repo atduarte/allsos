@@ -8,7 +8,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_selected"
+            android:id="@+id/lbl_selected"
             android:text="Serviço Seleccionado: "/>
     <Button
             android:layout_width="251dp"
@@ -16,4 +16,9 @@
             android:text="SOS!"
             android:id="@+id/btn_sos" android:layout_gravity="center_horizontal" android:layout_weight="0.28"
             android:background="@drawable/oval_button" android:textSize="50dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:id="@+id/btn_back" android:layout_gravity="center_horizontal"/>
 </LinearLayout>

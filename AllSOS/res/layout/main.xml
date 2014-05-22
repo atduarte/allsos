@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
+        android:id="@+id/linearLayout"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
@@ -10,29 +11,5 @@
             android:text="Categorias"
             android:id="@+id/textView" android:singleLine="false" android:gravity="center" android:textStyle="bold"
             android:textSize="30dp"/>
-    <Button
-            android:layout_width="384dp"
-            android:layout_height="wrap_content"
-            android:text="Advogado"
-            android:id="@+id/button" android:layout_gravity="right"/>
-    <Button
-            android:layout_width="384dp"
-            android:layout_height="wrap_content"
-            android:text="Enfermeiro"
-            android:id="@+id/button2" android:layout_gravity="right"/>
-    <Button
-            android:layout_width="383dp"
-            android:layout_height="wrap_content"
-            android:text="Florista"
-            android:id="@+id/button3" android:layout_gravity="right"/>
-    <Button
-            android:layout_width="383dp"
-            android:layout_height="wrap_content"
-            android:text="Medico"
-            android:id="@+id/button4" android:layout_gravity="right"/>
-    <Button
-            android:layout_width="383dp"
-            android:layout_height="wrap_content"
-            android:text="Psicologo"
-            android:id="@+id/button5" android:layout_gravity="right"/>
+
 </LinearLayout>

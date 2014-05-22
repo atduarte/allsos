@@ -35,7 +35,7 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="Entrar"
             android:id="@+id/btn_signin"
             android:layout_marginBottom="31dp"
             android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
