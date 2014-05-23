@@ -8,11 +8,9 @@ $router->setDefaultNamespace('AllSOS\Controllers');
 
 // Home
 $router->add('/', "Home::index")->setName('home');
+$router->add('/login', "Home::login");
+$router->add('/listAll',"Home::listAll");
+$router->add('/listAllSuppliers',"Home::listAllSuppliers");
 
-// 404 Not Found
-$router->notFound(array(
-    'controller' => 'home',
-    'action' => 'notFound'
-));
 
 return $router;

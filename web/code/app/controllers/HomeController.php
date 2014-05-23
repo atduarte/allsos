@@ -14,13 +14,18 @@ class HomeController extends AjaxController
         $user->cenas = "askjdhg". rand();
         $user->save();
 
-        $users = User::find();
 
-        $usersInfo = [];
-        foreach ($users as $user) {
-            $usersInfo[] = $user->toArray();
-        }
-
-        return $this->json($usersInfo);
     }
+    public function listAllAction(){
+        User::listAllUsers();
+
+    }
+    public function listAllSuppliersAction(){
+        User::listAllSuppliers();
+    }
+    public function loginAction(){
+        
+    }
+
+
 }
