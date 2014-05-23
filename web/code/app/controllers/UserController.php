@@ -97,13 +97,10 @@ class UserController extends AjaxController
 
     public function listAllAction()
     {
-        //User::listAllUsers();
+        User::listAllUsers();
     }
 
-    public function listAllSuppliersAction()
-    {
-        //User::listAllSuppliers();
-    }
+
 
 
 
