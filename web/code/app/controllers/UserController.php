@@ -97,18 +97,10 @@ class UserController extends AjaxController
 
     public function listAllAction()
     {
-        // $users = User::find();
-        // foreach ($users as $user) {
-        //     $user->delete();
-        // }
-        return $this->json(User::find());
-        //User::listAllUsers();
+        User::listAllUsers();
     }
 
-    public function listAllSuppliersAction()
-    {
-        //User::listAllSuppliers();
-    }
+
 
 
 

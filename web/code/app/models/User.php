@@ -130,35 +130,19 @@ class User extends MyMongo
         $this->tokens = array_values($this->tokens);
     }
 
+    public static function listAllUsers(){
+        $users = User::find();
 
-    // public static function listAllUsers(){
-    //     $users = User::find();
-    //     echo "<table border='1'>";
-    //     echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
-    //     foreach ($users as $key => $value) {
-    //         echo "<tr>";
-    //         echo "<td>".$value->email."</td>";
-    //         echo "<td>".$value->password."</td>";
-    //         echo "<td>".implode($value->tokens)."</td>";
-    //         echo "<td>".implode($value->services)."</td>";
-    //         echo "</tr>";
-    //     }
-    //     echo "</table>";
-    //  }
-    // public static function listAllSuppliers(){
-    //     $users = User::find();
-    //     echo "<table border='1'>";
-    //     echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
-    //     foreach ($users as $key => $value) {
-    //         echo "<tr>";
-    //         echo "<td>".$value->email."</td>";
-    //         echo "<td>".$value->password."</td>";
-    //         echo "<td>".implode($value->tokens)."</td>";
-    //         echo "<td>".implode($value->services)."</td>";
-    //         echo "</tr>";
-    //     }
-    //     echo "</table>";
-    // }
-
-
+        echo "<table border='1'>";
+        echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
+        foreach ($users as $key => $value) {
+            echo "<tr>";
+            echo "<td>".$value->email."</td>";
+            echo "<td>"."</td>";
+            echo "<td>".implode($value->tokens)."</td>";
+            echo "<td>".implode($value->services)."</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+     }
 }
