@@ -15,27 +15,29 @@ class User extends MyMongo
     public $range = null;
     public $_activeToken = null;
 
+    public function initialize()
+    {
+        $this->ensureIndex(
+            array('email' => 1),
+            array('unique' => true, 'dropDups' => true)
+        );
+    }
+
     public function logout()
     {
         if ($this->_activeToken == null) {
             return $this->logoutAll();
         }
 
-        $found = false;
-        foreach ($this->tokens as $i => $token) {
-            if ($token == $this->_activeToken) {
-                unset($this->tokens[$i]);
-                $found = true;
-            }
-        }
+        $this->tokens = array_diff($this->tokens, [$this->_activeToken]);
 
-        return $found;
+        return $this->save();
     }
 
     public function logoutAll()
     {
         $this->tokens = [];
-        return true;
+        return $this->save();
     }
 
     public static function findLoggedIn($email, $token)
@@ -43,10 +45,15 @@ class User extends MyMongo
         $user = User::findFirst([
             'conditions' => [
                 'email' => $email,
-                'token' => $token
+                'tokens' => (int)$token
             ]]);
 
+        if (!$user) {
+            return false;
+        }
+
         $user->_activeToken = $token;
+        return $user;
     }
 
     public static function findAndLogin($email, $password, &$token)
@@ -77,7 +84,7 @@ class User extends MyMongo
 
         // Create a Token
         $token = rand();
-        $this->token[] = $token;
+        $this->tokens[] = (int)$token;
 
         if ($this->save()) {
             return $token;
@@ -102,11 +109,11 @@ class User extends MyMongo
                 'field' => 'email'
         )));
 
-        if ($this->password) {
+        if (isset($this->password) && $this->password) {
             $this->validate(new StringLengthValidator(array(
                 'field' => 'password',
                 'max' => 50,
-                'min' => 6
+                'min' => 3
             )));
         }
 
@@ -119,37 +126,39 @@ class User extends MyMongo
             $this->passwordHash = password_hash($this->password, PASSWORD_BCRYPT);
             unset($this->password);
         }
+
+        $this->tokens = array_values($this->tokens);
     }
 
 
-    /*public static function listAllUsers(){
-        $users = User::find();
-        echo "<table border='1'>";
-        echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
-        foreach ($users as $key => $value) {
-            echo "<tr>";
-            echo "<td>".$value->email."</td>";
-            echo "<td>".$value->password."</td>";
-            echo "<td>".implode($value->tokens)."</td>";
-            echo "<td>".implode($value->services)."</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-     }
-    public static function listAllSuppliers(){
-        $users = User::find();
-        echo "<table border='1'>";
-        echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
-        foreach ($users as $key => $value) {
-            echo "<tr>";
-            echo "<td>".$value->email."</td>";
-            echo "<td>".$value->password."</td>";
-            echo "<td>".implode($value->tokens)."</td>";
-            echo "<td>".implode($value->services)."</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-    }*/
+    // public static function listAllUsers(){
+    //     $users = User::find();
+    //     echo "<table border='1'>";
+    //     echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
+    //     foreach ($users as $key => $value) {
+    //         echo "<tr>";
+    //         echo "<td>".$value->email."</td>";
+    //         echo "<td>".$value->password."</td>";
+    //         echo "<td>".implode($value->tokens)."</td>";
+    //         echo "<td>".implode($value->services)."</td>";
+    //         echo "</tr>";
+    //     }
+    //     echo "</table>";
+    //  }
+    // public static function listAllSuppliers(){
+    //     $users = User::find();
+    //     echo "<table border='1'>";
+    //     echo "<tr><td>email</td><td>password</td><td>tokens</td><td>services</td></tr>";
+    //     foreach ($users as $key => $value) {
+    //         echo "<tr>";
+    //         echo "<td>".$value->email."</td>";
+    //         echo "<td>".$value->password."</td>";
+    //         echo "<td>".implode($value->tokens)."</td>";
+    //         echo "<td>".implode($value->services)."</td>";
+    //         echo "</tr>";
+    //     }
+    //     echo "</table>";
+    // }
 
 
 }

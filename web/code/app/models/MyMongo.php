@@ -15,4 +15,13 @@ class MyMongo extends \Phalcon\Mvc\Collection
         // A unique index
         $collection->ensureIndex($fields, $args);
     }
+
+    public function save()
+    {
+        try {
+            return parent::save();
+        } catch (\MongoException $e) {
+            return false;
+        }
+    }
 }

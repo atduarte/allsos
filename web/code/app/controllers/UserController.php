@@ -52,7 +52,7 @@ class UserController extends AjaxController
         // Get infos from $_GET()
 
         $email = $this->request->getQuery("email", "email", null);
-        $password = $this->request->getQuery("password", "string", null);
+        $token = (int)$this->request->getQuery("token", "int", null);
 
         // Search for User
 
@@ -76,7 +76,7 @@ class UserController extends AjaxController
         // Get infos from $_GET()
 
         $email = $this->request->getQuery("email", "email", null);
-        $password = $this->request->getQuery("password", "string", null);
+        $token = (int)$this->request->getQuery("token", "int", null);
 
         // Search for User
 
@@ -97,6 +97,11 @@ class UserController extends AjaxController
 
     public function listAllAction()
     {
+        // $users = User::find();
+        // foreach ($users as $user) {
+        //     $user->delete();
+        // }
+        return $this->json(User::find());
         //User::listAllUsers();
     }
 

@@ -12,8 +12,8 @@ $router->add('/user/login', "User::login")->setName('login');
 $router->add('/user/logout', "User::logout")->setName('logout');
 $router->add('/user/logoutall', "User::logoutAll")->setName('logoutAll');
 
-$router->add('/listAll',"Home::listAll");
-$router->add('/listAllSuppliers',"Home::listAllSuppliers");
+$router->add('/user/listAll',"User::listAll");
+$router->add('/user/listAllSuppliers',"User::listAllSuppliers");
 
 
 return $router;
