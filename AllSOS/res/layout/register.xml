@@ -8,16 +8,22 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
-            android:id="@+id/txt_email" android:layout_below="@+id/lbl_email" android:layout_centerHorizontal="true"
-            android:layout_marginTop="38dp"/>
+            android:id="@+id/txt_email"
+            android:layout_below="@+id/lbl_email" android:layout_alignLeft="@+id/txt_confirm"
+            android:layout_alignRight="@+id/txt_confirm"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Número Telefone"
+              android:id="@+id/lbl_numerotele"
+              android:layout_below="@+id/txt_email" android:layout_centerHorizontal="true"/>
+    <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="textPassword"
+              android:ems="10" android:id="@+id/editText"
+              android:layout_below="@+id/lbl_numerotele" android:layout_alignLeft="@+id/txt_password"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/txt_password"
-            android:layout_below="@+id/lbl_password" android:layout_alignLeft="@+id/txt_email"
-            android:layout_marginTop="38dp"/>
+            android:layout_below="@+id/lbl_password" android:layout_alignLeft="@+id/txt_email"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,8 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Password"
             android:id="@+id/lbl_password"
-            android:layout_below="@+id/txt_email" android:layout_centerHorizontal="true"
-            android:layout_marginTop="43dp"/>
+            android:layout_below="@+id/editText" android:layout_centerHorizontal="true"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,13 +49,13 @@
             android:layout_height="wrap_content"
             android:text="Confirmar Password"
             android:id="@+id/lbl_confirm"
-            android:layout_marginTop="58dp" android:singleLine="false" android:layout_below="@+id/txt_password"
-            android:layout_centerHorizontal="true"/>
+            android:singleLine="false"
+            android:layout_below="@+id/txt_password" android:layout_centerHorizontal="true"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/txt_confirm" android:layout_below="@+id/lbl_confirm" android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"/>
+            android:id="@+id/txt_confirm"
+            android:layout_below="@+id/lbl_confirm" android:layout_centerHorizontal="true"/>
 </RelativeLayout>
