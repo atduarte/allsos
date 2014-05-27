@@ -42,11 +42,27 @@ public class SelectServiceActivity extends Activity {
         categorias.add("Florista");
         categorias.add("Cangalheiro");
 
+        /*
+        final Button myButton = new Button(this);
+        myButton.setId(1);
+        myButton.setText("teste");
+        myButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                selectedService = myButton.getText().toString();
+                Intent myIntent = new Intent(SelectServiceActivity.this, SOSActivity.class);
+                //myIntent.putExtra("SelectedService", selectedService);
+                SelectServiceActivity.this.startActivity(myIntent);
+            }
+        });
+        ll.addView(myButton);
+
+
+
+        */
         for(int i = 0; i < categorias.size(); i++){
             final Button myButton = new Button(this);
             myButton.setId(i);
             myButton.setText(categorias.get(i)); // Devolvido pela API
-            ll.addView(myButton);
             myButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     selectedService = myButton.getText().toString();
@@ -55,7 +71,9 @@ public class SelectServiceActivity extends Activity {
                     SelectServiceActivity.this.startActivity(myIntent);
                 }
             });
+            ll.addView(myButton);
 
         }
+
     }
 }

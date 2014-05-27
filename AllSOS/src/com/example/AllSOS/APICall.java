@@ -28,11 +28,8 @@ public class APICall{
     String response;
 
     APICall(String url) throws InterruptedException, ExecutionException, TimeoutException {
-
         String str_result= new HttpAsyncTask().execute(url).get();
-
         response = str_result;
-        //response = "manuel";
     }
 
     String getResponse(){
@@ -88,13 +85,5 @@ public class APICall{
         protected String doInBackground(String... urls) {
             return GET(urls[0]);
         }
-        // onPostExecute displays the results of the AsyncTask.
-        /*
-        @Override
-        protected void onPostExecute(String result) {
-
-            response = result;
-        }
-        */
     }
 }

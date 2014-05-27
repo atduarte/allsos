@@ -59,7 +59,7 @@ public class RegisterActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                /*
+
                 String insertedEmail = eEmail.getText().toString();
                 String insertedPassword = ePassword.getText().toString();
                 String insertedConfirmPassword = eConfirmPassword.getText().toString();
@@ -69,9 +69,10 @@ public class RegisterActivity extends Activity {
                     if(registerUser(insertedEmail, insertedPassword, insertedConfirmPassword)){
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
-                */
+
             }
         });
     }
@@ -92,21 +93,10 @@ public class RegisterActivity extends Activity {
 
      void testCall() throws JSONException, InterruptedException, ExecutionException, TimeoutException {
          APICall a = new APICall("http://hmkcode.appspot.com/rest/controller/get.json");
-
          String o = a.getResponse();
-
          resposta.setText(o);
-         //resposta.setText(o);
-            /*
-         JSONObject j = a.getJson();
 
-         JSONArray articles = j.getJSONArray("articleList"); // get articles array
-         articles.length(); // --> 2
-         articles.getJSONObject(0);
-         articles.getJSONObject(0).names();
-         articles.getJSONObject(0).getString("url");
 
-*/
      }
 
 
