@@ -13,4 +13,7 @@ $router->add('/user/logout', "User::logout")->setName('logout');
 $router->add('/user/logoutall', "User::logoutAll")->setName('logoutAll');
 $router->add('/user/listAll',"User::listAll");
 
+$router->add('/service/list',"Service::list");
+$router->add('/service/add' ,"Service::add");
+
 return $router;
