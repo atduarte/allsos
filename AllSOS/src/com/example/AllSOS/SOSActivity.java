@@ -20,8 +20,6 @@ public class SOSActivity extends Activity {
 
         setContentView(R.layout.askhelp);
 
-
-        //final TextView labelSelectedService = (TextView)findViewById(R.id.lbl_selected);
         final TextView serviceSelected = (TextView)findViewById(R.id.lbl_service);
 
         final Button sos = (Button) findViewById(R.id.btn_sos);

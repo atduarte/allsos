@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-        android:id="@+id/linearLayout"
+<RelativeLayout
+        android:id="@+id/layout_utilizador"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Categorias"
-            android:id="@+id/textView" android:singleLine="false" android:gravity="center" android:textStyle="bold"
-            android:textSize="30dp"/>
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+            android:id="@+id/linearLayout"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categorias"
+                android:id="@+id/textView" android:singleLine="false" android:gravity="center" android:textStyle="bold"
+                android:textSize="30dp"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/layout_bottombuttons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" >
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Definições"
+                android:id="@+id/btn_gotosettings"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sair"
+                android:id="@+id/btn_logout"/>
+
+    </LinearLayout>
+</RelativeLayout>

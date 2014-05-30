@@ -10,6 +10,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,8 +28,11 @@ import java.util.concurrent.TimeoutException;
 public class APICall{
     String response;
 
+
     APICall(String url) throws InterruptedException, ExecutionException, TimeoutException {
-        String str_result= new HttpAsyncTask().execute(url).get();
+        String baseURL = "http://sos.revis.pt/";
+        String finalUrl = baseURL.concat(url);
+        String str_result= new HttpAsyncTask().execute(finalUrl).get();
         response = str_result;
     }
 
@@ -38,6 +42,10 @@ public class APICall{
 
     JSONObject getJson() throws JSONException {
         return new JSONObject(response);
+    }
+
+    JSONArray getJsonArray() throws JSONException {
+        return new JSONArray(response);
     }
 
     public static String GET(String url){
