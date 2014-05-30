@@ -43,10 +43,12 @@ class UserController extends AjaxController
 
         $email = $this->request->getQuery("email", "email", null);
         $password = $this->request->getQuery("password", "string", null);
+        $telephone = $this->request->getQuery("telephone", "int", null);
 
         $user = new User();
         $user->email = $email;
         $user->password = $password;
+        $user->telephone = $telephone;
 
         if ($user->save()) {
             $token = $user->login($password);
