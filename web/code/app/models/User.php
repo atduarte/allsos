@@ -8,6 +8,7 @@ use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
 class User extends MyMongo
 {
     public $email = null;
+    public $telephone = null;
     public $password = null;
     public $tokens = [];
     public $services = [];
@@ -18,7 +19,7 @@ class User extends MyMongo
     public function initialize()
     {
         $this->ensureIndex(
-            array('email' => 1),
+            array('email' => 1, 'telephone' => 1),
             array('unique' => true, 'dropDups' => true)
         );
     }
@@ -108,6 +109,10 @@ class User extends MyMongo
         $this->validate(new EmailValidator(array(
                 'field' => 'email'
         )));
+
+        if (!isset($this->telephone) || !$this->telephone) {
+            return false;
+        }
 
         if (isset($this->password) && $this->password) {
             $this->validate(new StringLengthValidator(array(
