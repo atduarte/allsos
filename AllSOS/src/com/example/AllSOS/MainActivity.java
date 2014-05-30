@@ -23,8 +23,9 @@ public class MainActivity extends Activity {
         //setContentView(R.layout.main);
 
         //Verificar se ja ta registado/loggedin
-        Intent myIntent = new Intent(MainActivity.this, RegisterActivity.class);
+        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(myIntent);
+        finish();
 
     }
 }

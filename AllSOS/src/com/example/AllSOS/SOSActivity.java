@@ -1,6 +1,7 @@
 package com.example.AllSOS;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,11 +20,16 @@ public class SOSActivity extends Activity {
 
         setContentView(R.layout.askhelp);
 
-        final TextView labelSelectedService = (TextView)findViewById(R.id.lbl_selected);
+
+        //final TextView labelSelectedService = (TextView)findViewById(R.id.lbl_selected);
+        final TextView serviceSelected = (TextView)findViewById(R.id.lbl_service);
 
         final Button sos = (Button) findViewById(R.id.btn_sos);
         final Button back = (Button) findViewById(R.id.btn_back);
 
+        Intent intent = getIntent();
+        String s = intent.getStringExtra("SelectedService");
+        serviceSelected.setText(s);
 
         sos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -35,7 +41,7 @@ public class SOSActivity extends Activity {
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.main);
+                finish();
             }
         });
 
