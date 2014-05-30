@@ -6,6 +6,37 @@ use AllSOS\Models\User;
 
 class UserController extends AjaxController
 {
+    public function changeInfoAction()
+    {
+        // Search for User
+        $email = $this->request->getQuery("email", "email", null);
+        $token = (int)$this->request->getQuery("token", "int", null);
+
+        $user = User::findLoggedIn($email, $token);
+
+        if (!$user) {
+            return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
+        }
+
+        // Change Data
+
+        $fields = ['email', 'password', 'services', 'location', 'range'];
+
+        foreach ($fields as $field) {
+            $value = $this->request->getQuery($field, null, null);
+
+            if ($value) {
+                $user->{$field} = $value;
+            }
+        }
+
+        if ($user->save()) {
+            return $this->json(['success' => true]);
+        } else {
+            return $this->json(['success' => false, 'message' => 'Invalid Fields']);
+        }
+    }
+
     public function signUpAction()
     {
         // Get infos from $_GET()
