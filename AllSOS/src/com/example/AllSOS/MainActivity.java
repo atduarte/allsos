@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
 public class MainActivity extends Activity {
     /**
      * Called when the activity is first created.
@@ -19,13 +23,13 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO: Set Layout to Welcome Page
-        //setContentView(R.layout.main);
+        //TODO: Set Layout to Welcome Page (?)
 
         //Verificar se ja ta registado/loggedin
         Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(myIntent);
         finish();
+
 
     }
 }

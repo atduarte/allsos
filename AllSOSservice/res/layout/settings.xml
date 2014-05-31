@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:id="@+id/lay"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+        android:id="@+id/linearLayout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:weightSum="1">
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Definições"
+            android:id="@+id/lbl_settings"
+            android:singleLine="false"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_weight="0.11"/>
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/layout_grid_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="5"
+                android:layout_marginLeft="10pt"
+                android:orientation="horizontal"
+                tools:context=".GridXMLActivity" >
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_email_s"
+                android:text="Endereço E-mail"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:id="@+id/txt_newEmail"
+                android:text=""
+                android:width="80pt"
+                android:layout_marginLeft="10pt"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_numero_s"
+                android:text="Contacto Telefónico"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_newTelNumber"
+                android:text=""
+                android:width="80pt"
+                android:layout_marginLeft="10pt"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_password_s"
+                android:text="Password"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/txt_newPassword"
+                android:text=""
+                android:width="80pt"
+                android:layout_marginLeft="10pt"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_conf_password_s"
+                android:text="Confirmar Password"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/txt_newConfirmPassword"
+                android:text=""
+                android:width="80pt"
+                android:layout_marginLeft="10pt"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_local"
+                android:text="Local"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_local"
+                android:text=""
+                android:width="80pt"
+                android:layout_marginLeft="10pt"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_alcance"
+                android:text="Alcance"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_alcance"
+                android:inputType="numberDecimal"
+                android:text=""
+                android:width="80pt"
+                android:layout_marginLeft="10pt"/>
+
+    </GridLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/layout_settings_bottomebuttons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" >>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Efectuar Alterações"
+            android:id="@+id/btn_submitChanges"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:id="@+id/btn_back_s" />
+    </LinearLayout>
+</RelativeLayout>
