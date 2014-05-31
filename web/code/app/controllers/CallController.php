@@ -46,6 +46,7 @@ class CallController extends AjaxController
         }
 
         $call = new Call();
+        $call->service = $service;
         $call->user = $this->user->_id;
         foreach ($providers as $provider) {
             $call->providers[] = $provider->_id;
@@ -87,5 +88,10 @@ class CallController extends AjaxController
         }
 
         return $call->{$method}($this->user->_id);
+    }
+
+    public function listAllAction()
+    {
+        return $this->json(Call::find());
     }
 }
