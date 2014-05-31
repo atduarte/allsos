@@ -78,6 +78,10 @@ class User extends MyMongo
 
         $token = $user->login($password);
 
+        if (!$token) {
+            return false;
+        }
+
         return $user;
     }
 

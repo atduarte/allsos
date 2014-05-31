@@ -8,16 +8,9 @@ use AllSOS\Models\Call;
 
 class CallController extends AjaxController
 {
-
     public function createCallAction()
     {
-        // Search for User
-        $email = $this->request->getQuery("email", "email", null);
-        $token = (int)$this->request->getQuery("token", "int", null);
-
-        $user = User::findLoggedIn($email, $token);
-
-        if (!$user) {
+        if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
         }
 
@@ -31,7 +24,7 @@ class CallController extends AjaxController
 
         // Check User Location
 
-        if (!$user->location) {
+        if (!$this->user->location) {
             return $this->json(['success' => false, 'message' => 'Invalid Location']);
         }
 
@@ -53,24 +46,35 @@ class CallController extends AjaxController
         }
 
         $call = new Call();
-        $call->user = $user->_id;
+        $call->user = $this->user->_id;
         foreach ($providers as $provider) {
             $call->providers[] = $provider->_id;
         }
         $call->save();
 
-        return $this->json($call);
+        // TODO: Contact Providers
+
+        return $this->json(['success' => true]);
     }
 
-    protected function callReaction($method)
+    public function acceptCallAction()
     {
-        // Search for User
-        $email = $this->request->getQuery("email", "email", null);
-        $token = (int)$this->request->getQuery("token", "int", null);
+        if ($this->callReaction('providerAccepts', $call)) {
+            // TODO: Return Info about User & Service
+            return $this->json(['success' => true, 'message' => '']);
+        }
 
-        $user = User::findLoggedIn($email, $token);
+         return $this->json(['success' => false]);
+    }
 
-        if (!$user || !$user->isProvider()) {
+    public function rejectCallAction()
+    {
+        return $this->json(['success' => $this->callReaction('providerRejects', $call)]);
+    }
+
+    protected function callReaction($method, &$call)
+    {
+        if (!$this->user || !$this->user->isProvider()) {
             return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
         }
 
@@ -82,16 +86,6 @@ class CallController extends AjaxController
             return $this->json(['success' => false, 'message' => 'Invalid Call']);
         }
 
-        return $this->json(['success' => $call->{$method}($user->_id)]);
-    }
-
-    public function acceptCallAction()
-    {
-        $this->callReaction('providerAccepts');
-    }
-
-    public function rejectCallAction()
-    {
-        $this->callReaction('providerRejects');
+        return $call->{$method}($this->user->_id);
     }
 }

@@ -8,19 +8,8 @@ class UserController extends AjaxController
 {
     protected $user;
 
-    protected function getUser()
-    {
-        // Search for User
-        $email = $this->request->getQuery("email", "email", null);
-        $token = (int)$this->request->getQuery("token", "int", null);
-
-        $this->user = User::findLoggedIn($email, $token);
-    }
-
     public function changeInfoAction()
     {
-        $this->getUser();
-
         if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
         }
@@ -51,8 +40,6 @@ class UserController extends AjaxController
 
     public function changeLocationAction()
     {
-        $this->getUser();
-
         if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
         }
@@ -71,8 +58,6 @@ class UserController extends AjaxController
 
     public function getInfoAction()
     {
-        $this->getUser();
-
         if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
         }
@@ -131,8 +116,6 @@ class UserController extends AjaxController
 
     public function logoutAction()
     {
-        $this->getUser();
-
         if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
         }
@@ -148,8 +131,6 @@ class UserController extends AjaxController
 
     public function logoutAllAction()
     {
-        $this->getUser();
-
         if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
         }
