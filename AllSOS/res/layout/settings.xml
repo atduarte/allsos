@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <RelativeLayout
         android:id="@+id/lay"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:descendantFocusability="beforeDescendants"
         xmlns:android="http://schemas.android.com/apk/res/android">
+
+
     <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/ll_new"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -21,8 +25,7 @@
                 android:singleLine="false"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_weight="0.11"/>
+                android:textSize="20dp"/>
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/layout_grid_form"
@@ -55,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_newTelNumber"
+                    android:inputType="number"
                     android:text=""
                     android:width="80pt"
                     android:layout_marginLeft="10pt"/>
@@ -93,40 +97,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_local"
-                    android:text=""
-                    android:width="80pt"
-                    android:layout_marginLeft="10pt"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lbl_alcance"
-                    android:text="Alcance"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txt_alcance"
-                    android:inputType="numberDecimal"
+                    android:singleLine="true"
                     android:text=""
                     android:width="80pt"
                     android:layout_marginLeft="10pt"/>
 
 
-            <!--<TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lbl_addService"
-                    android:text="Adicionar Novo Serviço"/>
-            -->
         </GridLayout>
 
 
     </LinearLayout>
+
+
     <LinearLayout
             android:id="@+id/layout_settings_bottomebuttons"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical" >>
+            android:orientation="vertical" >
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -138,4 +126,13 @@
                 android:text="Voltar"
                 android:id="@+id/btn_back_s" />
     </LinearLayout>
+
+
+
 </RelativeLayout>
+
+        <!--
+        <ScrollView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">-->

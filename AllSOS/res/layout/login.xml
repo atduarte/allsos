@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:id="@+id/txt_s_email"
-                android:width="100pt" android:text="1@1.com"/>
+                android:width="100pt" android:text="a@a.a"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:id="@+id/txt_s_password"
-                android:width="100pt" android:text="123"/>
+                android:width="100pt" android:text="aaa"/>
 
         <Button
                 android:layout_marginTop="20pt"
