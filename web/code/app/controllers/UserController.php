@@ -16,7 +16,7 @@ class UserController extends AjaxController
 
         // Change Data
 
-        $fields = ['newEmail', 'password', 'services'];
+        $fields = ['newEmail', 'password', 'services', 'telephone'];
 
         foreach ($fields as $field) {
             $this->user->{$field} = $this->request->getQuery($field, null, null);
