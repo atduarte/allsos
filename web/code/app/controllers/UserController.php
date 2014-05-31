@@ -16,7 +16,7 @@ class UserController extends AjaxController
 
         // Change Data
 
-        $fields = ['newEmail', 'password', 'services', 'range'];
+        $fields = ['newEmail', 'password', 'services'];
 
         foreach ($fields as $field) {
             $this->user->{$field} = $this->request->getQuery($field, null, null);
@@ -106,6 +106,11 @@ class UserController extends AjaxController
         // Try Login
 
         $user = User::findAndLogin($email, $password, $token);
+
+        $registrationId = $this->request->getQuery("registrationId", "string", null);
+        if ($registrationId) {
+            $user->registrationId[] = $registrationId;
+        }
 
         if ($user) {
             return $this->json(['success' => true, 'token' => $token]);

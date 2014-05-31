@@ -13,7 +13,7 @@ class User extends MyMongo
     public $tokens = [];
     public $services = [];
     public $location = null;
-    public $range = null;
+    public $registrationIds = [];
     public $_activeToken = null;
 
     public function initialize()
@@ -150,6 +150,11 @@ class User extends MyMongo
 
                 $value = floatval($value);
             }
+        }
+
+        // Registration Ids
+        if (!is_array($this->registrationIds)) {
+            return false;
         }
 
         return $this->validationHasFailed() != true;
