@@ -4,19 +4,26 @@ namespace AllSOS\Controllers;
 
 use AllSOS\Models\Service;
 
-class ServiceController extends AjaxController{
+class ServiceController extends AjaxController
+{
 
-	public function listAction(){
-		$service = new Service();
-		return $this->json( $service->getServices() );
+	public function listAction()
+	{
+		return $this->json(Service::find());
 	}
-	public function addAction(){
 
-		$newName = $this->request->getQuery("catName", "string", null);
+	public function addAction()
+	{
+		$newName = $this->request->getQuery("name", "string", null);
+
+		if (!$newName) {
+			return $this->json(['success' => false, 'message' => 'Missing Name']);
+		}
+
 		$service = new Service();
 		$service->name = $newName;
 
-		return $this->json( $service->save() );
+		return $this->json(['success' => $service->save()]);
 	}
 
 }

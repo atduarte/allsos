@@ -22,6 +22,10 @@ class User extends MyMongo
             array('email' => 1, 'telephone' => 1),
             array('unique' => true, 'dropDups' => true)
         );
+
+        $this->ensureIndex(
+            array('location' => '2d')
+        );
     }
 
     public function logout()
@@ -110,16 +114,38 @@ class User extends MyMongo
                 'field' => 'email'
         )));
 
+        // Telephone
         if (!isset($this->telephone) || !$this->telephone) {
             return false;
         }
 
+        // Password
         if (isset($this->password) && $this->password) {
             $this->validate(new StringLengthValidator(array(
                 'field' => 'password',
                 'max' => 50,
                 'min' => 3
             )));
+        }
+
+        // Services
+        if ($this->services && !is_array($this->services)) {
+            return false;
+        }
+
+        // Location
+        if ($this->location) {
+            if (!is_array($this->location)) {
+                return false;
+            }
+
+            foreach ($this->location as $i => &$value) {
+                if ($i > 1) {
+                    return false;
+                }
+
+                $value = floatval($value);
+            }
         }
 
         return $this->validationHasFailed() != true;
@@ -133,6 +159,17 @@ class User extends MyMongo
         }
 
         $this->tokens = array_values($this->tokens);
+    }
+
+    public function isProvider()
+    {
+        if (!$this->services ||
+            ($this->services && !is_array($this->services)) ||
+            (is_array($this->services) && count($this->services) == 0)) {
+            return false;
+        }
+
+        return true;
     }
 
     public static function listAllUsers(){

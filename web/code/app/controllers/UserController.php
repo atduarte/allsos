@@ -6,41 +6,82 @@ use AllSOS\Models\User;
 
 class UserController extends AjaxController
 {
-    public function changeInfoAction()
+    protected $user;
+
+    protected function getUser()
     {
         // Search for User
         $email = $this->request->getQuery("email", "email", null);
         $token = (int)$this->request->getQuery("token", "int", null);
 
-        $user = User::findLoggedIn($email, $token);
+        $this->user = User::findLoggedIn($email, $token);
+    }
 
-        if (!$user) {
+    public function changeInfoAction()
+    {
+        $this->getUser();
+
+        if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
         }
 
         // Change Data
 
-        $fields = ['email', 'password', 'services', 'location', 'range'];
+        $fields = ['newEmail', 'password', 'services', 'range'];
 
         foreach ($fields as $field) {
-            $value = $this->request->getQuery($field, null, null);
-
-            if ($value) {
-                $user->{$field} = $value;
-            }
+            $this->user->{$field} = $this->request->getQuery($field, null, null);
         }
 
-        if ($user->save()) {
+        if ($this->user->save()) {
             return $this->json(['success' => true]);
         } else {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
         }
     }
 
+    public function changeLocationAction()
+    {
+        $this->getUser();
+
+        if (!$this->user) {
+            return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
+        }
+
+        $lat = $this->request->getQuery('lat', "string", null);
+        $lon = $this->request->getQuery('lon', "string", null);
+
+        $this->user->location = [$lat, $lon];
+
+        if ($this->user->save()) {
+            return $this->json(['success' => true]);
+        } else {
+            return $this->json(['success' => false, 'message' => 'Invalid Location']);
+        }
+    }
+
+    public function getInfoAction()
+    {
+        $this->getUser();
+
+        if (!$this->user) {
+            return $this->json(['success' => false, 'message' => 'Invalid Email-Token']);
+        }
+
+        $info = $this->user->toArray();
+
+        unset($info['password']);
+        unset($info['tokens']);
+        unset($info['_id']);
+        unset($info['_activeToken']);
+        unset($info['passwordHash']);
+
+        return $this->json($info);
+    }
+
     public function signUpAction()
     {
         // Get infos from $_GET()
-
         $email = $this->request->getQuery("email", "email", null);
         $password = $this->request->getQuery("password", "string", null);
         $telephone = $this->request->getQuery("telephone", "int", null);
@@ -61,7 +102,6 @@ class UserController extends AjaxController
     public function loginAction()
     {
         // Get infos from $_GET()
-
         $email = $this->request->getQuery("email", "email", null);
         $password = $this->request->getQuery("password", "string", null);
 
@@ -82,22 +122,15 @@ class UserController extends AjaxController
 
     public function logoutAction()
     {
-        // Get infos from $_GET()
+        $this->getUser();
 
-        $email = $this->request->getQuery("email", "email", null);
-        $token = (int)$this->request->getQuery("token", "int", null);
-
-        // Search for User
-
-        $user = User::findLoggedIn($email, $token);
-
-        if (!$user) {
+        if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
         }
 
         // Try Logout
 
-        if ($user->logout()) {
+        if ($this->user->logout()) {
             return $this->json(['success' => true]);
         } else {
             return $this->json(['success' => false]);
@@ -106,22 +139,15 @@ class UserController extends AjaxController
 
     public function logoutAllAction()
     {
-        // Get infos from $_GET()
+        $this->getUser();
 
-        $email = $this->request->getQuery("email", "email", null);
-        $token = (int)$this->request->getQuery("token", "int", null);
-
-        // Search for User
-
-        $user = User::findLoggedIn($email, $token);
-
-        if (!$user) {
+        if (!$this->user) {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
         }
 
         // Try LogoutAll()
 
-        if ($user->logoutAll()) {
+        if ($this->user->logoutAll()) {
             return $this->json(['success' => true]);
         } else {
             return $this->json(['success' => false]);
@@ -130,11 +156,7 @@ class UserController extends AjaxController
 
     public function listAllAction()
     {
-        User::listAllUsers();
+        return $this->json(User::find());
+        // User::listAllUsers();
     }
-
-
-
-
-
 }

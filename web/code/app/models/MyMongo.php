@@ -4,7 +4,7 @@ namespace AllSOS\Models;
 
 class MyMongo extends \Phalcon\Mvc\Collection
 {
-    public function ensureIndex(array $fields, array $args)
+    public function ensureIndex(array $fields, array $args = null)
     {
         // Get the raw \MongoDB Connection
         $connection = $this->getConnection();
@@ -13,7 +13,11 @@ class MyMongo extends \Phalcon\Mvc\Collection
         $collection = $connection->selectCollection($this->getSource());
 
         // A unique index
-        $collection->ensureIndex($fields, $args);
+        if ($args) {
+            $collection->ensureIndex($fields, $args);
+        } else {
+            $collection->ensureIndex($fields);
+        }
     }
 
     public function save()
