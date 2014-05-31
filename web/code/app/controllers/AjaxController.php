@@ -3,6 +3,7 @@
 namespace AllSOS\Controllers;
 
 use AllSOS\Models as Models;
+use AllSOS\Models\User;
 
 class AjaxController extends \Phalcon\Mvc\Controller
 {
