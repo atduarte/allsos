@@ -7,14 +7,27 @@ $router->removeExtraSlashes(true);
 $router->setDefaultNamespace('AllSOS\Controllers');
 
 // Home
-$router->add('/user/signup', "User::signup")->setName('signup');
-$router->add('/user/login', "User::login")->setName('login');
-$router->add('/user/logout', "User::logout")->setName('logout');
-$router->add('/user/logoutall', "User::logoutAll")->setName('logoutAll');
-$router->add('/user/changeinfo', "User::changeInfo")->setName('changeInfo');
-$router->add('/user/listAll',"User::listAll");
+$router->add('/user/signup', "User::signup");
+$router->add('/user/login', "User::login");
+$router->add('/user/logout', "User::logout");
+$router->add('/user/logoutall', "User::logoutAll");
+
+$router->add('/user/getinfo', "User::getInfo");
+$router->add('/user/changeinfo', "User::changeInfo");
+$router->add('/user/changelocation', "User::changeLocation");
+
+$router->add('/call/make', "Call::createCall");
+$router->add('/call/accept', "Call::acceptCall");
+$router->add('/call/reject', "Call::rejectCall");
 
 $router->add('/service/list',"Service::list");
 $router->add('/service/add' ,"Service::add");
+
+$router->add('/user/listall',"User::listAll");
+
+$router->notFound(array(
+    'controller' => 'ajax',
+    'action' => 'notFound'
+));
 
 return $router;

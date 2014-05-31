@@ -13,7 +13,7 @@ class User extends MyMongo
     public $tokens = [];
     public $services = [];
     public $location = null;
-    public $range = null;
+    public $registrationIds = [];
     public $_activeToken = null;
 
     public function initialize()
@@ -21,6 +21,10 @@ class User extends MyMongo
         $this->ensureIndex(
             array('email' => 1, 'telephone' => 1),
             array('unique' => true, 'dropDups' => true)
+        );
+
+        $this->ensureIndex(
+            array('location' => '2d')
         );
     }
 
@@ -74,6 +78,10 @@ class User extends MyMongo
 
         $token = $user->login($password);
 
+        if (!$token) {
+            return false;
+        }
+
         return $user;
     }
 
@@ -110,10 +118,12 @@ class User extends MyMongo
                 'field' => 'email'
         )));
 
+        // Telephone
         if (!isset($this->telephone) || !$this->telephone) {
             return false;
         }
 
+        // Password
         if (isset($this->password) && $this->password) {
             $this->validate(new StringLengthValidator(array(
                 'field' => 'password',
@@ -122,17 +132,53 @@ class User extends MyMongo
             )));
         }
 
+        // Services
+        if ($this->services && !is_array($this->services)) {
+            return false;
+        }
+
+        // Location
+        if ($this->location) {
+            if (!is_array($this->location)) {
+                return false;
+            }
+
+            foreach ($this->location as $i => &$value) {
+                if ($i > 1) {
+                    return false;
+                }
+
+                $value = floatval($value);
+            }
+        }
+
+        // Registration Ids
+        if (!is_array($this->registrationIds)) {
+            return false;
+        }
+
         return $this->validationHasFailed() != true;
     }
 
     public function beforeSave()
     {
-        if (isset($this->password)) {
+        if (isset($this->password) && $this->password) {
             $this->passwordHash = password_hash($this->password, PASSWORD_BCRYPT);
             unset($this->password);
         }
 
         $this->tokens = array_values($this->tokens);
+    }
+
+    public function isProvider()
+    {
+        if (!$this->services ||
+            ($this->services && !is_array($this->services)) ||
+            (is_array($this->services) && count($this->services) == 0)) {
+            return false;
+        }
+
+        return true;
     }
 
     public static function listAllUsers(){
