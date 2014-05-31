@@ -27,7 +27,7 @@ class UserController extends AjaxController
         $lat = $this->request->getQuery('lat', "string", null);
         $lon = $this->request->getQuery('lon', "string", null);
 
-        if ($lan && $lon) {
+        if ($lat && $lon) {
             $this->user->location = [$lat, $lon];
         }
 
