@@ -30,7 +30,7 @@ public class LoginActivity extends Activity {
 
         final Button signIn = (Button) findViewById(R.id.btn_signin);
         final EditText sEmail = (EditText)findViewById(R.id.txt_s_email);
-        final EditText sPassword = (EditText)findViewById(R.id.txt_s_email);
+        final EditText sPassword = (EditText)findViewById(R.id.txt_s_password);
         final Button lRegister = (Button) findViewById(R.id.btn_gotoreg);
 
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,6 @@ public class LoginActivity extends Activity {
                 // Perform action on click
                 String insertedEmail = sEmail.getText().toString();
                 String insertedPassword = sPassword.getText().toString();
-
 
                 try {
                     if(signInUser(insertedEmail, insertedPassword)){
@@ -79,19 +78,20 @@ public class LoginActivity extends Activity {
     // API
     boolean signInUser(String email, String password) throws IOException, JSONException, InterruptedException, ExecutionException, TimeoutException {
         // Chamada API para Login
-        String addToUrl = "user/login?email=%22" + email + "%22&password=%22" + password + "%22";
+        String addToUrl = "user/login?email=" + email + "&password=" + password + "";
         APICall a = new APICall(addToUrl);
 
         JSONObject res = a.getJson();
         String success = res.get("success").toString();
         if(success.equals("true")){
-            UserInformation.token = res.get("token").toString();
+            String token = res.get("token").toString();
+            UserInformation.email = email;
+            UserInformation.token = token;
             return true;
         }
         else{
             return false;
         }
-
     }
 
     public void msgBox_okbuttononly(String str, String str2)
@@ -122,13 +122,13 @@ public class LoginActivity extends Activity {
                         closeApplication(); // Close Application method called
                     }
                 })
-        .setNegativeButton("Não",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.dismiss();
-                        dialog.cancel();
-                    }
-                });
+                .setNegativeButton("Não",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.dismiss();
+                                dialog.cancel();
+                            }
+                        });
 
         AlertDialog alert = builder.create();
         alert.show();

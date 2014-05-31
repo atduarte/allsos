@@ -32,7 +32,6 @@ public class SettingsActivity extends Activity {
         final EditText newPassword = (EditText) findViewById(R.id.txt_newPassword);
         final EditText newConfirmPass = (EditText) findViewById(R.id.txt_confirmPassword);
         final EditText newLocation = (EditText) findViewById(R.id.txt_local);
-        final EditText newRange = (EditText) findViewById(R.id.txt_alcance);
 
         submitChanges.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,11 +40,10 @@ public class SettingsActivity extends Activity {
                 String number = newNumber.getText().toString();
                 String password = newPassword.getText().toString();
                 String confirmPass = newConfirmPass.getText().toString();
-                String location = newLocation.getText().toString();
-                String range = newRange.getText().toString();
+                //String location = newLocation.getText().toString();
 
                 try {
-                    if(submitChanges(email,number,password,confirmPass,location,range)){
+                    if(submitChanges(email,number,password,confirmPass)){
                         msgBox_okbuttononly("Sucesso", "Alterações efetuadas com sucesso");
                         Intent intent = new Intent(SettingsActivity.this, SelectServiceActivity.class);
                         SettingsActivity.this.startActivity(intent);
@@ -85,7 +83,7 @@ public class SettingsActivity extends Activity {
     }
 
 
-    boolean submitChanges(String email, String number, String pw, String conf_pw, String location, String range) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+    boolean submitChanges(String email, String number, String pw, String conf_pw) throws InterruptedException, ExecutionException, TimeoutException, JSONException {
         if(!pw.equals(conf_pw)){
             return false;
         }
