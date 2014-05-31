@@ -13,6 +13,11 @@ class AjaxController extends \Phalcon\Mvc\Controller
         echo json_encode($result);
         return false;
     }
+
+    public function notFoundAction()
+    {
+        return $this->json(['success' => false, 'message' => '404 - Not Found']);
+    }
 }
 
 

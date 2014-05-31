@@ -25,4 +25,9 @@ $router->add('/service/add' ,"Service::add");
 
 $router->add('/user/listall',"User::listAll");
 
+$router->notFound(array(
+    'controller' => 'ajax',
+    'action' => 'notFound'
+));
+
 return $router;
