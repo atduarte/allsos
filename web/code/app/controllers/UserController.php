@@ -19,10 +19,14 @@ class UserController extends AjaxController
         $fields = ['newEmail', 'password', 'services', 'telephone'];
 
         foreach ($fields as $field) {
-            $this->user->{$field} = $this->request->getQuery($field, null, null);
+            $value = $this->request->getQuery($field, null, null);
+
+            if ($value) {
+                $this->user->{$field} = $value;
+            }
         }
 
-        // Change Location
+       // Change Location
 
         $lat = $this->request->getQuery('lat', "string", null);
         $lon = $this->request->getQuery('lon', "string", null);

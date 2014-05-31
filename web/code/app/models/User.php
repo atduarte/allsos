@@ -162,7 +162,7 @@ class User extends MyMongo
 
     public function beforeSave()
     {
-        if (isset($this->password)) {
+        if (isset($this->password) && $this->password) {
             $this->passwordHash = password_hash($this->password, PASSWORD_BCRYPT);
             unset($this->password);
         }
