@@ -90,7 +90,7 @@ class CallController extends AjaxController
         $this->callReaction('providerAccepts');
     }
 
-    public function rejectsCallAction()
+    public function rejectCallAction()
     {
         $this->callReaction('providerRejects');
     }

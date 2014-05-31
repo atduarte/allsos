@@ -33,6 +33,15 @@ class UserController extends AjaxController
             $this->user->{$field} = $this->request->getQuery($field, null, null);
         }
 
+        // Change Location
+
+        $lat = $this->request->getQuery('lat', "string", null);
+        $lon = $this->request->getQuery('lon', "string", null);
+
+        if ($lan && $lon) {
+            $this->user->location = [$lat, $lon];
+        }
+
         if ($this->user->save()) {
             return $this->json(['success' => true]);
         } else {
