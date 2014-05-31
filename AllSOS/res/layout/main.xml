@@ -6,20 +6,70 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-            android:id="@+id/linearLayout"
-            android:orientation="vertical"
+    <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Categorias"
-                android:id="@+id/textView" android:singleLine="false" android:gravity="center" android:textStyle="bold"
-                android:textSize="30dp"/>
+            android:layout_height="800px">
+        <LinearLayout
+                android:id="@+id/linearLayout"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Categorias"
+                    android:id="@+id/textView"
+                    android:singleLine="false"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/layout_grid_form"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:layout_margin="10pt"
+                        android:layout_marginBottom="20pt"
+                        android:orientation="horizontal"
+                        tools:context=".GridXMLActivity" >
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Autenticado como:"
+                        android:id="@+id/lbl_signedinas"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lbl_username_select"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Telefone Activo:"
+                        android:id="@+id/lbl_tel"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lbl_telephone_select"/>
+                <!--
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Local:"
+                        android:id="@+id/lbl_loc"/>
 
-    </LinearLayout>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lbl_location_select"/>
+                 -->
+            </GridLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
             android:id="@+id/layout_bottombuttons"

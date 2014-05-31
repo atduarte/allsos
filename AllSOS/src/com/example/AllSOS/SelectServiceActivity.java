@@ -4,16 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
+import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -23,6 +24,10 @@ public class SelectServiceActivity extends Activity {
      */
 
     String selectedService;
+    String locationText = null;
+    Hashtable<String,String> services;
+
+    //TextView locationLabel; se quiser meter location no menu principal
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,12 +35,21 @@ public class SelectServiceActivity extends Activity {
 
         setContentView(R.layout.main);
 
+        services = new Hashtable<String,String>();
+
         final Button settings = (Button) findViewById(R.id.btn_gotosettings);
         final Button logout = (Button) findViewById(R.id.btn_logout);
+        final TextView email = (TextView) findViewById(R.id.lbl_username_select);
+        final TextView telephone = (TextView) findViewById(R.id.lbl_telephone_select);
 
         final LinearLayout ll;
         ll = (LinearLayout) findViewById(R.id.linearLayout);
+
+        JSONObject fillInfo = null;
         try {
+            fillInfo = getInfo();
+            email.setText(fillInfo.get("email").toString());
+            telephone.setText(fillInfo.get("telephone").toString());
             initializeServiceButtons(ll);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -46,6 +60,8 @@ public class SelectServiceActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
 
         settings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -64,9 +80,6 @@ public class SelectServiceActivity extends Activity {
                 finish();
             }
         });
-
-
-
     }
 
     @Override
@@ -85,6 +98,9 @@ public class SelectServiceActivity extends Activity {
             JSONObject curr = new JSONObject(arr.get(i).toString());
             String cat = curr.getString("name").toString();
             categorias.add(cat);
+            JSONObject obj = (JSONObject) curr.get("_id");
+            String id = obj.getString("$id").toString();
+            services.put(cat,id);
         }
 
         for(int i = 0; i < categorias.size(); i++){
@@ -95,6 +111,8 @@ public class SelectServiceActivity extends Activity {
                 public void onClick(View v) {
                     selectedService = myButton.getText().toString();
                     Intent myIntent = new Intent(SelectServiceActivity.this, SOSActivity.class);
+                    String idSS = services.get(selectedService);
+                    myIntent.putExtra("SelectedServiceID", idSS);
                     myIntent.putExtra("SelectedService", selectedService);
                     SelectServiceActivity.this.startActivity(myIntent);
                 }
@@ -127,4 +145,12 @@ public class SelectServiceActivity extends Activity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    JSONObject getInfo() throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+        String url = "user/getinfo?token=" + UserInformation.token + "&email="+ UserInformation.email;
+
+        APICall a = new APICall(url);
+        return a.getJson();
+    }
+
 }

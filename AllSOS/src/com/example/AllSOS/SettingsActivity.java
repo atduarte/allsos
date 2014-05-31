@@ -11,6 +11,7 @@ import android.widget.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -30,8 +31,25 @@ public class SettingsActivity extends Activity {
         final EditText newEmail = (EditText) findViewById(R.id.txt_newEmail);
         final EditText newNumber = (EditText) findViewById(R.id.txt_newTelNumber);
         final EditText newPassword = (EditText) findViewById(R.id.txt_newPassword);
-        final EditText newConfirmPass = (EditText) findViewById(R.id.txt_confirmPassword);
-        final EditText newLocation = (EditText) findViewById(R.id.txt_local);
+        final EditText newConfirmPass = (EditText) findViewById(R.id.txt_newConfirmPassword);
+        //final EditText newLocation = (EditText) findViewById(R.id.txt_local);
+
+        JSONObject fillInfo = null;
+        try {
+            fillInfo = getInfo();
+            newEmail.setText(fillInfo.get("email").toString());
+            newNumber.setText(fillInfo.get("telephone").toString());
+            newPassword.setText("");
+            newConfirmPass.setText("");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         submitChanges.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,16 +59,12 @@ public class SettingsActivity extends Activity {
                 String password = newPassword.getText().toString();
                 String confirmPass = newConfirmPass.getText().toString();
                 //String location = newLocation.getText().toString();
-
                 try {
                     if(submitChanges(email,number,password,confirmPass)){
-                        msgBox_okbuttononly("Sucesso", "Alterações efetuadas com sucesso");
-                        Intent intent = new Intent(SettingsActivity.this, SelectServiceActivity.class);
-                        SettingsActivity.this.startActivity(intent);
-                        finish();
+                        msgBox_okbuttononly_goto_loggedin("Sucesso", "Alterações efetuadas com sucesso");
                     }
                     else{
-                        msgBox_okbuttononly("Erro", "Não foi possível efectuar as alterações. Por favor verifique as suas credenciais");
+                        msgBox_okbuttononly_stay("Erro", "Não foi possível efectuar as alterações. Por favor verifique os campos inseridos");
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -88,13 +102,20 @@ public class SettingsActivity extends Activity {
             return false;
         }
         else{
-            // TODO: rever url
-            String url = "changeInfo?email="+email+"&token="+UserInformation.token+"&password="+pw;
+            String url = "user/changeinfo?"
+                    + "token="+ UserInformation.token
+                    + "&email=" + email
+                    + "&telephone=" + number;
+            if(!pw.equals("")){
+                url+= "&password=" + pw;
+            }
+
             APICall a = new APICall(url);
             JSONObject res = a.getJson();
 
             String success = res.get("success").toString();
             if(success.equals("true")){
+                UserInformation.email = email;
                 return true;
             }
             else{
@@ -103,7 +124,28 @@ public class SettingsActivity extends Activity {
         }
     }
 
-    public void msgBox_okbuttononly(String str, String str2)
+
+    public void msgBox_okbuttononly_goto_loggedin(String str, String str2)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(str);
+        builder.setMessage(str2);
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent(SettingsActivity.this, SelectServiceActivity.class);
+                SettingsActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public void msgBox_okbuttononly_stay(String str, String str2)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -118,5 +160,12 @@ public class SettingsActivity extends Activity {
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    JSONObject getInfo() throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+        String url = "user/getinfo?token=" + UserInformation.token + "&email="+ UserInformation.email;
+
+        APICall a = new APICall(url);
+        return a.getJson();
     }
 }
