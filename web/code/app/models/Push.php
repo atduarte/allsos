@@ -6,7 +6,7 @@ class Push
 {
     const API_ACCESS_KEY = 'AIzaSyAPS4yV7FE18NCbvpne3PxMlz0Ddv7K9_I';
 
-    public function send($message, $ids)
+    public static function send($message, $ids)
     {
         $msg = [
             'message'    => $message,
@@ -23,7 +23,7 @@ class Push
         ];
 
         $headers = [
-            'Authorization: key=' . API_ACCESS_KEY,
+            'Authorization: key=' . self::API_ACCESS_KEY,
             'Content-Type: application/json'
         ];
 

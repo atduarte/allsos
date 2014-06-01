@@ -23,12 +23,6 @@ class CallController extends AjaxController
             return $this->json(['success' => false, 'message' => 'Invalid Service']);
         }
 
-        // Check User Location
-
-        if (!$this->user->location) {
-            return $this->json(['success' => false, 'message' => 'Invalid Location']);
-        }
-
         // Search Providers
 
         $lat = $this->request->getQuery("lat", "string", null);
