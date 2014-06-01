@@ -2,6 +2,7 @@
 
 namespace AllSOS\Controllers;
 
+use AllSOS\Models\Push;
 use AllSOS\Models\Service;
 use AllSOS\Models\User;
 use AllSOS\Models\Call;
@@ -45,15 +46,19 @@ class CallController extends AjaxController
             return $this->json(['success' => false, 'message' => 'Providers not found']);
         }
 
+        $pushIds = [];
+
         $call = new Call();
         $call->service = $service;
         $call->user = $this->user->_id;
         foreach ($providers as $provider) {
             $call->providers[] = $provider->_id;
+            $pushIds[] = $provider->registrationId;
         }
         $call->save();
 
-        // TODO: Contact Providers
+        // Contact Providers
+        Push::send('És uma puta', $pushIds);
 
         return $this->json(['success' => true]);
     }
@@ -61,8 +66,10 @@ class CallController extends AjaxController
     public function acceptCallAction()
     {
         if ($this->callReaction('providerAccepts', $call)) {
-            // TODO: Return Info about User & Service
-            return $this->json(['success' => true, 'message' => '']);
+            // Return Info about User & Service
+            $info['user'] = User::findById((string)$call->_id);
+            $info['call'] = $call->toArray();
+            return $this->json(['success' => true, 'message' => $info]);
         }
 
          return $this->json(['success' => false]);
