@@ -45,15 +45,15 @@ class CallController extends AjaxController
         $call = new Call();
         $call->service = $service;
         $call->user = $this->user->_id;
+        $call->location = [$lat, $lon];
         foreach ($providers as $provider) {
             $call->providers[] = $provider->_id;
             $pushIds[] = $provider->registrationId;
         }
         $call->save();
 
-        $service = Service::findById($service);
-
         // Contact Providers
+        $service = Service::findById($service);
         Push::send('Serviço: ' . $service->name, $pushIds);
 
         return $this->json(['success' => true]);

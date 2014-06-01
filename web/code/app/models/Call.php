@@ -7,6 +7,7 @@ class Call extends MyMongo
     public $user = null;
     public $providers = [];
     public $assignedProvider = null;
+    public $location = null;
 
     public function isClosed()
     {
