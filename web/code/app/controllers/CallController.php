@@ -95,6 +95,10 @@ class CallController extends AjaxController
 
     public function listAction()
     {
+        if (!$this->user) {
+            return $this->json(['success' => false]);
+        }
+
         $calls = Call::find([
             'conditions' => [
                 'providers' => $this->user->_id
