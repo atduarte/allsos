@@ -56,7 +56,8 @@ public class LoggedInActivity extends Activity {
                 TextView req_email = new TextView(this);
                 req_email.setText("E-mail: " + emailTarget);
 
-                JSONArray location = userObj.getJSONArray("location");
+                JSONObject call = obj.getJSONObject("call");
+                JSONArray location = call.getJSONArray("location");
                 latitudeTarget = location.get(0).toString();
                 TextView req_latitude = new TextView(this);
                 req_latitude.setText("Latitude: " + latitudeTarget);
@@ -66,7 +67,6 @@ public class LoggedInActivity extends Activity {
 
                 telephoneTarget = userObj.getString("telephone").toString();
 
-                JSONObject call = obj.getJSONObject("call");
                 JSONObject id1 = call.getJSONObject("_id");
                 final String idS= id1.getString("$id");
                 String serviceId = call.getString("service");
@@ -95,14 +95,7 @@ public class LoggedInActivity extends Activity {
                             e.printStackTrace();
                         }
 
-                        finish();
-                        Intent intent = new Intent(LoggedInActivity.this, UserInfoActivity.class);
-                        intent.putExtra("email",emailTarget);
-                        intent.putExtra("number",telephoneTarget);
-                        intent.putExtra("latitude",latitudeTarget);
-                        intent.putExtra("longitude",longitudeTarget);
-                        intent.putExtra("service",serviceTarget);
-                        LoggedInActivity.this.startActivity(intent);
+
 
                     }
                 });
@@ -129,7 +122,6 @@ public class LoggedInActivity extends Activity {
                         finish();
                         Intent intent = new Intent(LoggedInActivity.this, LoggedInActivity.class);
                         LoggedInActivity.this.startActivity(intent);
-
                     }
                 });
 
@@ -150,6 +142,8 @@ public class LoggedInActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
 
         final TextView userEmail = (TextView) findViewById(R.id.lbl_username);
         final TextView telephone = (TextView) findViewById(R.id.lbl_telephone_w);
