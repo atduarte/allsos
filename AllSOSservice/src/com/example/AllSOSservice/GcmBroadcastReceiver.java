@@ -52,7 +52,7 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("My notification")
+                        .setContentTitle("Novo Pedido")
                         .setContentText(message);
 
         Intent resultIntent = new Intent(context, LoggedInActivity.class);

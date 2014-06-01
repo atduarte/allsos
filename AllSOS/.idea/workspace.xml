@@ -106,20 +106,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GcmBroadcastReceiver.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GcmBroadcastReceiver.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/AllSOS/GcmBroadcastReceiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="629">
-              <caret line="34" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.3073005" vertical-offset="380" max-vertical-offset="1088">
+              <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4516129" vertical-offset="907" max-vertical-offset="1496">
+            <state vertical-scroll-proportion="0.0" vertical-offset="142" max-vertical-offset="1496">
               <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="77" selection-end-column="52" />
               <folding />
             </state>
@@ -159,10 +159,10 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/com/example/AllSOS/GcmIntentService.java" />
         <option value="$PROJECT_DIR$/src/com/example/AllSOS/RegisterActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/example/AllSOS/GcmBroadcastReceiver.java" />
         <option value="$PROJECT_DIR$/src/com/example/AllSOS/SelectServiceActivity.java" />
         <option value="$PROJECT_DIR$/src/com/example/AllSOS/LoginActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/example/AllSOS/GcmBroadcastReceiver.java" />
       </list>
     </option>
   </component>
@@ -616,16 +616,16 @@
       <workItem from="1401595507334" duration="1435000" />
       <workItem from="1401597578578" duration="614000" />
       <workItem from="1401598731301" duration="887000" />
-      <workItem from="1401599771326" duration="4955000" />
+      <workItem from="1401599771326" duration="5628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38165000" />
+    <option name="totallyTimeSpent" value="38838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1159,18 +1159,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/AllSOS/GcmBroadcastReceiver.java">
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="629">
-          <caret line="34" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="142" max-vertical-offset="1496">
+          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="77" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/example/AllSOS/GcmBroadcastReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4516129" vertical-offset="907" max-vertical-offset="1496">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="77" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.3073005" vertical-offset="380" max-vertical-offset="1088">
+          <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
           <folding />
         </state>
       </provider>
