@@ -45,25 +45,7 @@ public class LoggedInActivity extends Activity {
         JSONArray arr = null;
         try {
             arr = getCallsById();
-
-
             LinearLayout ll_requests = (LinearLayout) findViewById(R.id.ll_pedidos);
-             /*
-            TextView req_show_service = new TextView(this);
-            req_show_service.setText("Serviço");
-            TextView req_show_email = new TextView(this);
-            req_show_email.setText("E-mail");
-            TextView req_show_latitude = new TextView(this);
-            req_show_latitude.setText("Latitude");
-            TextView req_show_longitude = new TextView(this);
-            req_show_longitude.setText("Longitude");
-
-            ll_requests.addView(req_show_service);
-            ll_requests.addView(req_show_email);
-            ll_requests.addView(req_show_latitude);
-            ll_requests.addView(req_show_longitude);
-            */
-
 
             for(int i = 0; i < arr.length(); i++) {
 
@@ -218,6 +200,7 @@ public class LoggedInActivity extends Activity {
         }
         */
 
+
         goToSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(LoggedInActivity.this, SettingsActivity.class);
@@ -229,6 +212,26 @@ public class LoggedInActivity extends Activity {
 
         logout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String url = "user/logout?token=" + UserInformation.token + "&email="+ UserInformation.email;
+                try {
+                    APICall a = new APICall(url);
+                    JSONObject obj = a.getJson();
+                    String success = obj.getString("success");
+                    if(success.equals("true")){
+                        UserInformation.token = "";
+                        UserInformation.email = "";
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 Intent intent = new Intent(LoggedInActivity.this, LoginActivity.class);
                 LoggedInActivity.this.startActivity(intent);
                 finish();

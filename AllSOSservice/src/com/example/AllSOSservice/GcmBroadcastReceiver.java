@@ -24,7 +24,11 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 
 /**
@@ -60,7 +64,23 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
                         .setContentTitle("Novo Pedido de Ajuda!")
                         .setContentText("Alguem precisa de um " + message);
 
-        Intent resultIntent = new Intent(context, LoggedInActivity.class);
+        Intent resultIntent = null;
+        try {
+            if(isLoggedIn()) {
+                 resultIntent = new Intent(context, LoggedInActivity.class);
+            }
+            else{
+                resultIntent = new Intent(context, LoginActivity.class);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // Because clicking the notification opens a new ("special") activity, there's
         // no need to create an artificial back stack.
@@ -81,4 +101,21 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 // Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
+
+   boolean isLoggedIn() throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+       String url = "user/changeinfo?"
+               + "token="+ UserInformation.token
+               + "&email=" + UserInformation.email;
+
+       APICall a = new APICall(url);
+       JSONObject res = a.getJson();
+
+       String success = res.get("success").toString();
+       if(success.equals("true")){
+           return true;
+       }
+       else{
+           return false;
+       }
+   }
 }
