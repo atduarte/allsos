@@ -30,7 +30,7 @@ class Call extends MyMongo
 
             if(count($this->providers) == 0) {
                 $user = User::findById((string)$this->user);
-                Push::send('ups', [$user->registrationId]);
+                Push::send('Não foram encontradas pessoas disponíveis.', [$user->registrationId]);
             }
 
             return true;

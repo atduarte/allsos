@@ -51,8 +51,10 @@ class CallController extends AjaxController
         }
         $call->save();
 
+        $service = Service::findById($service);
+
         // Contact Providers
-        Push::send('És uma puta', $pushIds);
+        Push::send('Serviço: ' . $service->name, $pushIds);
 
         return $this->json(['success' => true]);
     }
