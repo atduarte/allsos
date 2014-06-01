@@ -94,7 +94,14 @@ public class LoggedInActivity extends Activity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
+                        finish();
+                        Intent intent = new Intent(LoggedInActivity.this, UserInfoActivity.class);
+                        intent.putExtra("email",emailTarget);
+                        intent.putExtra("number",telephoneTarget);
+                        intent.putExtra("latitude",latitudeTarget);
+                        intent.putExtra("longitude",longitudeTarget);
+                        intent.putExtra("service",serviceTarget);
+                        LoggedInActivity.this.startActivity(intent);
 
 
                     }
