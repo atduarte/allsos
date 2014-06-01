@@ -93,8 +93,21 @@ class CallController extends AjaxController
         return $call->{$method}($this->user->_id);
     }
 
-    public function listAllAction()
+    public function listAction()
     {
-        return $this->json(Call::find());
+        $calls = Call::find([
+            'conditions' => [
+                'providers' => $this->user->_id
+            ]
+        ]);
+
+        $infos = [];
+        foreach ($calls as $call) {
+            $info['user'] = User::findById((string)$call->_id);
+            $info['call'] = $call->toArray();
+            $infos[] = $info;
+        }
+
+        return $this->json($infos);
     }
 }
