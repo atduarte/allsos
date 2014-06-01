@@ -63,9 +63,10 @@ class CallController extends AjaxController
     {
         if ($this->callReaction('providerAccepts', $call)) {
             // Return Info about User & Service
-            $info['user'] = User::findById((string)$call->_id);
+            $user = User::findById((string)$call->_id);
+            $info['user'] = $user;
             $info['call'] = $call->toArray();
-            Push::send('Pedido correspondido', [$info['user']->registrationId]);
+            Push::send('Pedido correspondido', [$user->registrationId]);
             return $this->json(['success' => true, 'message' => $info]);
         }
 
