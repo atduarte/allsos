@@ -108,6 +108,7 @@ class CallController extends AjaxController
         $infos = [];
         foreach ($calls as $call) {
             $info['user'] = User::findById((string)$call->user);
+            $info['user'] = $info['user']->toArray();
             unset($info['user']['tokens']);
             unset($info['user']['password']);
             unset($info['user']['services']);
