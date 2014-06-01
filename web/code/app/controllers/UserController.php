@@ -116,7 +116,7 @@ class UserController extends AjaxController
             $user->registrationId = $registrationId;
         }
 
-        if ($user) {
+        if ($user && $user->save()) {
             return $this->json(['success' => true, 'token' => $token]);
         } else {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
