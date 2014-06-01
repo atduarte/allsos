@@ -152,11 +152,6 @@ class User extends MyMongo
             }
         }
 
-        // Registration Ids
-        if (!is_array($this->registrationId)) {
-            return false;
-        }
-
         return $this->validationHasFailed() != true;
     }
 
