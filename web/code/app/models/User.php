@@ -153,7 +153,7 @@ class User extends MyMongo
         }
 
         // Registration Ids
-        if (!is_array($this->registrationIds)) {
+        if (!is_array($this->registrationId)) {
             return false;
         }
 
