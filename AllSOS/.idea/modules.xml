@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AllSOS.iml" filepath="$PROJECT_DIR$/AllSOS.iml" />
+      <module fileurl="file://C:/adt-bundle-windows-x86_64-20140321/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="C:/adt-bundle-windows-x86_64-20140321/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
     </modules>
   </component>
 </project>

@@ -27,6 +27,7 @@ public class RegisterActivity extends Activity {
 
         setContentView(R.layout.register);
 
+
         final Button back = (Button) findViewById(R.id.btn_back_r);
         final Button register = (Button) findViewById(R.id.btn_register_r);
         final EditText eTelephone = (EditText)findViewById(R.id.txt_telNumber);

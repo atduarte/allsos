@@ -11,8 +11,19 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="google-play-services_lib" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/adt-bundle-windows-x86_64-20140321/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="android-support-v4" level="project" />
   </component>
 </module>
 

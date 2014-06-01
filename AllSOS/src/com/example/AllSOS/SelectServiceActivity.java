@@ -2,8 +2,7 @@ package com.example.AllSOS;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -26,14 +25,17 @@ public class SelectServiceActivity extends Activity {
     String selectedService;
     String locationText = null;
     Hashtable<String,String> services;
+    Context context;
 
     //TextView locationLabel; se quiser meter location no menu principal
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
+        context = getBaseContext();
 
         services = new Hashtable<String,String>();
 
