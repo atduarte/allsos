@@ -1,4 +1,4 @@
-package com.example.AllSOS;
+package com.example.AllSOSservice;
 
 import android.content.Context;
 import android.location.Location;

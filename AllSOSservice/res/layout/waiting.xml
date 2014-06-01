@@ -40,27 +40,23 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Local:"
+                android:text="Pedidos de Serviços"
                 android:textSize="9pt"
                 android:id="@+id/lbl_loc"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12pt"
-                android:id="@+id/lbl_location"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="A Prestar os Serviços:"
-                android:textSize="9pt"
-                android:id="@+id/lbl_introd_services"/>
-        <LinearLayout
-                android:id="@+id/ll_avaiable"
-                android:orientation="vertical"
+
+        <ScrollView
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-        </LinearLayout>
+                android:layout_height="500px">
+            <LinearLayout
+                    android:id="@+id/ll_pedidos"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
     <LinearLayout

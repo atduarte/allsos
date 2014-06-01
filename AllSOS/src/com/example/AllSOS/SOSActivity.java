@@ -22,7 +22,6 @@ public class SOSActivity extends Activity {
      * Called when the activity is first created.
      */
 
-    String selectedService;
     TextView locationLabel;
     String locationText;
     double latitude;
@@ -46,7 +45,7 @@ public class SOSActivity extends Activity {
         idService = intent.getStringExtra("SelectedServiceID");
         serviceSelected.setText(s);
 
-        locationLabel = (TextView) findViewById(R.id.lbl_location_sos);
+        //locationLabel = (TextView) findViewById(R.id.lbl_location_sos);
 
         MyLocation.LocationResult locationResult = new MyLocation.LocationResult(){
             @Override
@@ -70,13 +69,13 @@ public class SOSActivity extends Activity {
                     //refreshLocationOnServer();
                     if(askForHelp(idService)){
                         msgBox_okbuttononly_goto_main("Sucesso", "Pedido efectuado com sucesso");
-                        Toast toast = Toast.makeText(getBaseContext(), "Pedido efectuado com sucesso", 1000);
-                        toast.show();
+                        //Toast toast = Toast.makeText(getBaseContext(), "Pedido efectuado com sucesso", 1000);
+                        //toast.show();
                     }
                     else{
                         msgBox_okbuttononly_goto_main("Erro", "Não foi possível terminar o pedido");
-                        Toast toast = Toast.makeText(getBaseContext(), "Erro no pedido", 1000);
-                        toast.show();
+                        //Toast toast = Toast.makeText(getBaseContext(), "Erro no pedido", 1000);
+                        //toast.show();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
+import org.json.JSONObject;
 
 
 /**
@@ -46,14 +47,18 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
         setResultCode(Activity.RESULT_OK);
 
         String message = intent.getStringExtra("message");
+        String email = intent.getStringExtra("email");
+        String latitude = intent.getStringExtra("latitude");
+        String longitude = intent.getStringExtra("longitude");
+
         Toast toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
         toast.show();
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("Novo Pedido")
-                        .setContentText(message);
+                        .setContentTitle("Novo Pedido de Ajuda!")
+                        .setContentText("Alguem precisa de um " + message);
 
         Intent resultIntent = new Intent(context, LoggedInActivity.class);
 

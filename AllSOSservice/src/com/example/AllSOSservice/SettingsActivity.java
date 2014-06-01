@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -25,11 +26,14 @@ public class SettingsActivity extends Activity {
      * Called when the activity is first created.
      */
 
-    String notSelected = "-";
     Hashtable<String,String> services;
     Hashtable<String,String> getIDbyName;
     Hashtable<String,String> myservices;
     Hashtable<String,CheckBox> dynamicCheckBoxes;
+
+    double latitude;
+    double longitude;
+    String provider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,12 +66,13 @@ public class SettingsActivity extends Activity {
 
         final Button submitChanges = (Button) findViewById(R.id.btn_submitChanges);
         final Button back = (Button) findViewById(R.id.btn_back_s);
+        final Button sendLocation = (Button) findViewById(R.id.btn_local);
 
         final EditText newEmail = (EditText) findViewById(R.id.txt_newEmail);
         final EditText newNumber = (EditText) findViewById(R.id.txt_newTelNumber);
         final EditText newPassword = (EditText) findViewById(R.id.txt_newPassword);
         final EditText newConfirmPass = (EditText) findViewById(R.id.txt_newConfirmPassword);
-        //final EditText newLocation = (EditText) findViewById(R.id.txt_local);
+
 
 
         JSONObject fillInfo = null;
@@ -92,6 +97,36 @@ public class SettingsActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        sendLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                MyLocation.LocationResult locationResult = new MyLocation.LocationResult(){
+                    @Override
+                    public void gotLocation(Location loc){
+                        latitude = loc.getLatitude();
+                        longitude = loc.getLongitude();
+                        provider = loc.getProvider();
+
+                    }
+                };
+                MyLocation loc = new MyLocation();
+                loc.getLocation(getApplicationContext(), locationResult);
+                try {
+                    Thread.sleep(300);
+                    sendLocationInfo();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         submitChanges.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -270,6 +305,28 @@ public class SettingsActivity extends Activity {
     public void checkCurrentServices(GridLayout ll, ArrayList<String> items){
         for(int i = 0; i < items.size(); i++){
             (dynamicCheckBoxes.get(items.get(i))).setChecked(true);
+        }
+    }
+
+    public boolean sendLocationInfo() throws InterruptedException, ExecutionException, TimeoutException, JSONException {
+        String url = "user/changelocation?token=" + UserInformation.token + "&email=" + UserInformation.email
+                + "&lat=" + latitude
+                + "&lon=" + longitude;
+        APICall a = new APICall(url);
+
+        JSONObject res = a.getJson();
+        String success = res.getString("success");
+
+        if(success.equals("true")){
+            Toast toast = Toast.makeText(this, "Localização atualizada com sucesso.", Toast.LENGTH_LONG);
+            toast.show();
+            return true;
+        }
+        else{
+            String message = res.getString("message");
+            Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+            toast.show();
+            return false;
         }
     }
 

@@ -94,12 +94,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/lbl_local"
                     android:text="Local"/>
-            <EditText
+            <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txt_local"
+                    android:id="@+id/btn_local"
                     android:singleLine="true"
-                    android:text=""
+                    android:text="Localizar-me"
                     android:width="80pt"
                     android:layout_marginLeft="10pt"/>
             <TextView
@@ -117,14 +117,13 @@
         <ScrollView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
-                android:layout_height="380px">
+                android:layout_height="300px">
             <LinearLayout android:id="@+id/ll_c"
                           android:orientation="vertical"
                           android:layout_width="fill_parent"
                           android:layout_height="fill_parent"
                           xmlns:android="http://schemas.android.com/apk/res/android"
                           android:weightSum="1">
-
 
                 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                             xmlns:tools="http://schemas.android.com/tools"
