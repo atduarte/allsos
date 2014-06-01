@@ -23,7 +23,7 @@ class Push
         ];
 
         $headers = [
-            'Authorization: key=' . API_ACCESS_KEY,
+            'Authorization: key=' . self::API_ACCESS_KEY,
             'Content-Type: application/json'
         ];
 
