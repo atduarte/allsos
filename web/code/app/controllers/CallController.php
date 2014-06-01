@@ -25,8 +25,8 @@ class CallController extends AjaxController
 
         // Search Providers
 
-        $lat = $this->request->getQuery("lat", "string", null);
-        $lon = $this->request->getQuery("lon", "string", null);
+        $lat = (float)$this->request->getQuery("lat", "string", null);
+        $lon = (float)$this->request->getQuery("lon", "string", null);
 
         $providers = User::find([
             'conditions' => [
@@ -108,6 +108,10 @@ class CallController extends AjaxController
         $infos = [];
         foreach ($calls as $call) {
             $info['user'] = User::findById((string)$call->user);
+            unset($info['user']['tokens']);
+            unset($info['user']['password']);
+            unset($info['user']['services']);
+            unset($info['user']['passwordHash']);
             $info['call'] = $call->toArray();
             $infos[] = $info;
         }
