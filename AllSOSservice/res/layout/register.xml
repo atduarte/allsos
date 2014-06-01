@@ -3,7 +3,8 @@
 <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#ffffff">
     <LinearLayout
             android:id="@+id/linearLayout"
             android:orientation="vertical"
@@ -54,8 +55,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_telNumber"
-                    android:text="9999"
+                    android:text="919799"
                     android:width="80pt"
+                    android:inputType="number"
                     android:layout_marginLeft="10pt"/>
             <TextView
                     android:layout_width="match_parent"
@@ -67,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:id="@+id/txt_email"
-                    android:text="leonel@lol.com"
+                    android:text="a@a.a"
                     android:width="80pt"
                     android:layout_marginLeft="10pt"/>
             <TextView
@@ -80,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:id="@+id/txt_password"
-                    android:text="user334"
+                    android:text="aaa"
                     android:width="80pt"
                     android:layout_marginLeft="10pt"/>
             <TextView
@@ -93,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:id="@+id/txt_confirmPassword"
-                    android:text="user334"
+                    android:text="aaa"
                     android:width="80pt"
                     android:layout_marginLeft="10pt"/>
 

@@ -5,31 +5,62 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="#ffffff"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
             android:id="@+id/linearLayout"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_margin="20dp"
             xmlns:android="http://schemas.android.com/apk/res/android">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Autenticado como:"
+                android:textSize="9pt"
                 android:id="@+id/lbl_signedinas"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="12pt"
                 android:id="@+id/lbl_username"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="A Prestar os Serviços:"
-            android:id="@+id/lbl_introd_services"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lbl_online_sevices"/>
+                android:text="Telefone Activo:"
+                android:textSize="9pt"
+                android:id="@+id/lbl_tel"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12pt"
+                android:id="@+id/lbl_telephone_w"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Local:"
+                android:textSize="9pt"
+                android:id="@+id/lbl_loc"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12pt"
+                android:id="@+id/lbl_location"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A Prestar os Serviços:"
+                android:textSize="9pt"
+                android:id="@+id/lbl_introd_services"/>
+        <LinearLayout
+                android:id="@+id/ll_avaiable"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

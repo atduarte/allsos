@@ -6,4 +6,5 @@ package com.example.AllSOSservice;
 public class UserInformation {
     static String token;
     static String email;
+
 }
