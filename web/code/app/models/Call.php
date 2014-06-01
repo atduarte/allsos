@@ -23,7 +23,17 @@ class Call extends MyMongo
 
         if($key !== false){
             unset($this->providers[$key]);
-            return $this->save();
+
+            if (!$this->save()) {
+                return false;
+            }
+
+            if(count($this->providers) == 0) {
+                $user = User::findById((string)$this->user);
+                Push::send('ups', [$user->registrationId]);
+            }
+
+            return true;
         }
 
         return false;
