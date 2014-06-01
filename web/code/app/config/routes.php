@@ -19,7 +19,7 @@ $router->add('/user/changelocation', "User::changeLocation");
 $router->add('/call/make', "Call::createCall");
 $router->add('/call/accept', "Call::acceptCall");
 $router->add('/call/reject', "Call::rejectCall");
-$router->add('/call/listall', "Call::listAll");
+$router->add('/call/list', "Call::list");
 
 $router->add('/service/list',"Service::list");
 $router->add('/service/add' ,"Service::add");

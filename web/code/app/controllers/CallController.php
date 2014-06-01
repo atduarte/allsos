@@ -25,8 +25,8 @@ class CallController extends AjaxController
 
         // Search Providers
 
-        $lat = $this->request->getQuery("lat", "string", null);
-        $lon = $this->request->getQuery("lon", "string", null);
+        $lat = (float)$this->request->getQuery("lat", "string", null);
+        $lon = (float)$this->request->getQuery("lon", "string", null);
 
         $providers = User::find([
             'conditions' => [
@@ -45,15 +45,15 @@ class CallController extends AjaxController
         $call = new Call();
         $call->service = $service;
         $call->user = $this->user->_id;
+        $call->location = [$lat, $lon];
         foreach ($providers as $provider) {
             $call->providers[] = $provider->_id;
             $pushIds[] = $provider->registrationId;
         }
         $call->save();
 
-        $service = Service::findById($service);
-
         // Contact Providers
+        $service = Service::findById($service);
         Push::send('Serviço: ' . $service->name, $pushIds);
 
         return $this->json(['success' => true]);
@@ -63,8 +63,10 @@ class CallController extends AjaxController
     {
         if ($this->callReaction('providerAccepts', $call)) {
             // Return Info about User & Service
-            $info['user'] = User::findById((string)$call->_id);
+            $user = User::findById((string)$call->_id);
+            $info['user'] = $user;
             $info['call'] = $call->toArray();
+            Push::send('Pedido correspondido', [$user->registrationId]);
             return $this->json(['success' => true, 'message' => $info]);
         }
 
@@ -93,8 +95,30 @@ class CallController extends AjaxController
         return $call->{$method}($this->user->_id);
     }
 
-    public function listAllAction()
+    public function listAction()
     {
-        return $this->json(Call::find());
+        if (!$this->user) {
+            return $this->json(['success' => false]);
+        }
+
+        $calls = Call::find([
+            'conditions' => [
+                'providers' => $this->user->_id
+            ]
+        ]);
+
+        $infos = [];
+        foreach ($calls as $call) {
+            $info['user'] = User::findById((string)$call->user);
+            $info['user'] = $info['user']->toArray();
+            unset($info['user']['tokens']);
+            unset($info['user']['password']);
+            unset($info['user']['services']);
+            unset($info['user']['passwordHash']);
+            $info['call'] = $call->toArray();
+            $infos[] = $info;
+        }
+
+        return $this->json($infos);
     }
 }
