@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        mDisplay = (TextView) findViewById(R.id.lbl_email);
+        //mDisplay = (TextView) findViewById(R.id.lbl_email);
         context = getBaseContext();
 
 

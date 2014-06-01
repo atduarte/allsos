@@ -4,27 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class RegisterActivity extends Activity {
@@ -122,9 +111,11 @@ public class RegisterActivity extends Activity {
     }
 
     boolean register_areInputsValid(String email, String password, String confirmPassword){
-        if(password != confirmPassword){
-            //TODO: alterar para false
-            return true;
+        if(password.length() < 3){
+            msgBox_okbuttononly_stay("Erro", "Password deve ter pelo menos 3 caracteres");
+        }
+        if(!password.equals(confirmPassword)){
+            return false;
         }
         // Verificar se email ja existe (?) Chamada API
         return true;
@@ -132,7 +123,7 @@ public class RegisterActivity extends Activity {
 
     boolean registerUser(String email, String password, String telephone) throws IOException, JSONException, InterruptedException, ExecutionException, TimeoutException {
         // Chamada API para registo
-        String addToUrl = "user/signup?email=%22" + email + "%22&password=%22" + password + "%22&telephone=%22" + telephone + "%22";
+        String addToUrl = "user/signup?email=" + email + "&password=" + password + "&telephone=" + telephone + "";
 
         APICall a = new APICall(addToUrl);
         JSONObject res = a.getJson();
