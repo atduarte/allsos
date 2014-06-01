@@ -13,7 +13,7 @@ class User extends MyMongo
     public $tokens = [];
     public $services = [];
     public $location = null;
-    public $registrationIds = [];
+    public $registrationId = null;
     public $_activeToken = null;
 
     public function initialize()

@@ -16,7 +16,7 @@ class UserController extends AjaxController
 
         // Change Data
 
-        $fields = ['newEmail', 'password', 'services', 'telephone'];
+        $fields = ['newEmail', 'password', 'services', 'telephone', 'registrationId'];
 
         foreach ($fields as $field) {
             $value = $this->request->getQuery($field, null, null);
@@ -113,7 +113,7 @@ class UserController extends AjaxController
 
         $registrationId = $this->request->getQuery("registrationId", "string", null);
         if ($registrationId) {
-            $user->registrationId[] = $registrationId;
+            $user->registrationId = $registrationId;
         }
 
         if ($user) {
