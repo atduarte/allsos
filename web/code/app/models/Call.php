@@ -10,7 +10,7 @@ class Call extends MyMongo
 
     public function isClosed()
     {
-        return $this->assignedProvider != null;
+        return $this->assignedProvider != null || count($providers) == 0;
     }
 
     public function providerRejects($id)

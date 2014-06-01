@@ -111,12 +111,16 @@ class UserController extends AjaxController
 
         $user = User::findAndLogin($email, $password, $token);
 
+        if (!$user) {
+            return $this->json(['success' => false, 'message' => 'Invalid Fields']);
+        }
+
         $registrationId = $this->request->getQuery("registrationId", "string", null);
         if ($registrationId) {
             $user->registrationId = $registrationId;
         }
 
-        if ($user && $user->save()) {
+        if ($user->save()) {
             return $this->json(['success' => true, 'token' => $token]);
         } else {
             return $this->json(['success' => false, 'message' => 'Invalid Fields']);
