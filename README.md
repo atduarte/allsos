@@ -1,4 +1,0 @@
-ALLSOS
-======
-
-SDIS- FEUP
